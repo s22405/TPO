@@ -9,14 +9,15 @@ import java.util.ArrayList;
 public class Function {
     static void write(int status, int a,int b) throws IOException {
         byte[] bytes = {(byte) status, (byte) a, (byte) b};
-        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+        ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
 
         FileOutputStream out = new FileOutputStream(FileData.FileName);
         FileChannel fileChannel = out.getChannel();
-        fileChannel.write(buffer);
+        fileChannel.write(byteBuffer);
         System.out.println("WROTE:");
         System.out.println(status + " " + a + " " + b);
 
+        byteBuffer.flip();
         fileChannel.close();
         out.close();
     }
